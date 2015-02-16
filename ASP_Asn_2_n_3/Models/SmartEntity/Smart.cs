@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ASP_Asn_2_n_3.Models.SmartEntity
+namespace ASP_Asn_2_n_3.Models
 {
     public class Smart
     {
