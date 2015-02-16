@@ -14,8 +14,9 @@ namespace ASP_Asn_2_n_3.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
-        public GoodSamaritanContext() : base("name=GoodSamaritanContext")
+
+        public GoodSamaritanContext()
+            : base("name=GoodSamaritanConnection")
         {
         }
 
