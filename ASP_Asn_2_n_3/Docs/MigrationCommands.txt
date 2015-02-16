@@ -1,0 +1,5 @@
+﻿These are defaults from the slides, have not had a chance to figure out wtf to do yet
+
+Enable-Migrations -ContextTypeName CoursesContext -MigrationsDirectory Migrations\CoursesMigrations
+add-migration -ConfigurationTypeName Courses.Web.Migrations.CourseMigrations.Configuration "InitialCreate"
+update-database -ConfigurationTypeName Courses.Web.Migrations.CourseMigrations.Configuration

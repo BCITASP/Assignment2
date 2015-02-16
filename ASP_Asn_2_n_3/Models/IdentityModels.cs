@@ -20,7 +20,7 @@ namespace ASP_Asn_2_n_3.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("GoodSamaritanConnection", throwIfV1Schema: false)
         {
         }
 

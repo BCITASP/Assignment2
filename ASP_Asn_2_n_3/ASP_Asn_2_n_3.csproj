@@ -163,14 +163,35 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientsEntity\AbuserRelationship.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ClientsEntity\Age.cs" />
+    <Compile Include="Models\ClientsEntity\AssignedWorker.cs" />
+    <Compile Include="Models\ClientsEntity\Clients.cs" />
+    <Compile Include="Models\ClientsEntity\Crisis.cs" />
+    <Compile Include="Models\ClientsEntity\DuplicateFile.cs" />
+    <Compile Include="Models\ClientsEntity\Ethnicity.cs" />
+    <Compile Include="Models\ClientsEntity\FamilyViolenceFile.cs" />
+    <Compile Include="Models\ClientsEntity\FiscalYear.cs" />
+    <Compile Include="Models\ClientsEntity\StatusOfFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ClientsEntity\Incident.cs" />
+    <Compile Include="Models\ClientsEntity\Program.cs" />
+    <Compile Include="Models\ClientsEntity\ReferralContact.cs" />
+    <Compile Include="Models\ClientsEntity\ReferralSource.cs" />
+    <Compile Include="Models\ClientsEntity\RepeatClient.cs" />
+    <Compile Include="Models\ClientsEntity\RiskLevel.cs" />
+    <Compile Include="Models\ClientsEntity\RiskStatus.cs" />
+    <Compile Include="Models\ClientsEntity\Service.cs" />
+    <Compile Include="Models\ClientsEntity\VictimOfIncident.cs" />
+    <Compile Include="Models\SmartEntity\Smart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Docs\MigrationCommands.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
