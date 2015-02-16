@@ -9,9 +9,10 @@ namespace ASP_Asn_2_n_3.Models
 {
     public class Smart
     {
-        [ForeignKey("ClientReferenceNumber")]
+        [Key]
+        public virtual int SmartId { get; set; }
         public virtual int ClientReferenceNumber { get; set; }
-        public virtual int SexWorkExplotationId {get; set;}
+        public virtual int SexWorkExploitationId { get; set; }
         public virtual int MultiplePerpetratorsId { get; set; }
         public virtual int DrugFacilitatedAssaultId { get; set; }
         public virtual int CityOfAssaultId { get; set; }
@@ -31,6 +32,8 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int BadDateReportId { get; set; }
         public virtual bool ReferredToNursePractitioner { get; set; }
 
+
+        public virtual Clients Clients { get; set; }
         public virtual SexWorkExploitation SexWorkExploitation { get; set; }
         public virtual MultiplePerpetrators MultiplePerpetrators { get; set; }
         public virtual DrugFacilitatedAssault DrugFacilitatedAssault { get; set; }
