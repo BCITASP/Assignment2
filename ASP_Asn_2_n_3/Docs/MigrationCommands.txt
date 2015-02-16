@@ -1,5 +1,4 @@
-﻿These are defaults from the slides, have not had a chance to figure out wtf to do yet
-
-Enable-Migrations -ContextTypeName CoursesContext -MigrationsDirectory Migrations\CoursesMigrations
-add-migration -ConfigurationTypeName Courses.Web.Migrations.CourseMigrations.Configuration "InitialCreate"
-update-database -ConfigurationTypeName Courses.Web.Migrations.CourseMigrations.Configuration
+﻿
+Enable-Migrations -ContextTypeName GoodSamaritanContext -MigrationsDirectory Migrations\GoodSamaritan
+add-migration -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.GoodSamaritan.Configuration "InitialCreate"
+update-database -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.GoodSamaritan.Configuration
