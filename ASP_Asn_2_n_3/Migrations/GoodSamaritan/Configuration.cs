@@ -34,31 +34,7 @@ namespace ASP_Asn_2_n_3.Migrations.GoodSamaritan
 
             // Left above for reference
 
-            #region User Seeding
-            // Reference
-            // http://stackoverflow.com/questions/21170525/cant-connect-to-database-to-execute-identity-functions
-
-            // Begin by creating the new roles
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            RoleManager.Create(new IdentityRole("Administrator"));
-            RoleManager.Create(new IdentityRole("Worker"));
-            RoleManager.Create(new IdentityRole("Report"));
-
-            // Create the users
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var User = new ApplicationUser() { UserName = "adam@gs.ca" };
-            var Result = UserManager.Create(User, "P@$$w0rd");
-            UserManager.AddToRole(User.Id, "Administrator");
-
-            User = new ApplicationUser() { UserName = "wendy@gs.ca" };
-            Result = UserManager.Create(User, "P@$$w0rd");
-            UserManager.AddToRole(User.Id, "Worker");
-
-            User = new ApplicationUser() { UserName = "rob@gs.ca" };
-            Result = UserManager.Create(User, "P@$$w0rd");
-            UserManager.AddToRole(User.Id, "Report");
-            #endregion
+            
         }
     }
 }

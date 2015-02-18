@@ -1,4 +1,28 @@
-﻿
+﻿-------------
+Data Seeding
+-------------
+
 Enable-Migrations -ContextTypeName GoodSamaritanContext -MigrationsDirectory Migrations\GoodSamaritan
 add-migration -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.GoodSamaritan.Configuration "InitialCreate"
 update-database -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.GoodSamaritan.Configuration
+
+
+User Seeding - Tested
+
+Enable-Migrations -ContextTypeName ApplicationDbContext -MigrationsDirectory Migrations\Users
+add-migration -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.Users.Configuration "InitialUserCreate"
+update-database -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.Users.Configuration
+
+-------------
+Rolling back
+-------------
+http://stackoverflow.com/questions/10282532/entity-framework-start-over-undo-rollback-all-migrations
+
+Rolling back to a specific migration
+Update-Database -TargetMigration:"MigrationName"
+
+If only 1 migration, and want to undo that one
+Update-Database -TargetMigration:0
+
+In our case, rolling back user seeding would be
+update-database -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.Users.Configuration -TargetMigration:0
