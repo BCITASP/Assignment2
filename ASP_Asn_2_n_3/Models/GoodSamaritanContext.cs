@@ -91,6 +91,8 @@ namespace ASP_Asn_2_n_3.Models
         public System.Data.Entity.DbSet<ASP_Asn_2_n_3.Models.SocialWorkAttendance> SocialWorkAttendances { get; set; }
 
         public System.Data.Entity.DbSet<ASP_Asn_2_n_3.Models.ThirdPartyReport> ThirdPartyReports { get; set; }
+
+        public System.Data.Entity.DbSet<ASP_Asn_2_n_3.Models.VictimServicesAttendance> VictimServicesAttendances { get; set; }
     
     }
 }

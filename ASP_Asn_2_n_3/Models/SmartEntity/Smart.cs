@@ -43,6 +43,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual HospitalAttended HospitalAttended { get; set; }
         public virtual SocialWorkAttendance SocialWorkAttendance { get; set; }
         public virtual PoliceAttendance PoliceAttendance { get; set; }
+        public virtual VictimServicesAttendance VictimServicesAttendance { get; set; }
         public virtual MedicalOnly MedicalOnly { get; set; }
         public virtual EvidenceStored EvidenceStored { get; set; }
         public virtual HIVMeds HIVMeds { get; set; }

@@ -169,6 +169,14 @@
     <Compile Include="Migrations\GoodSamaritan\201502161436000_InitialCreate.Designer.cs">
       <DependentUpon>201502161436000_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201502180625035_SecondDataMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201502180625035_SecondDataMigration.Designer.cs">
+      <DependentUpon>201502180625035_SecondDataMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201502180710165_ThirdMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201502180710165_ThirdMigration.Designer.cs">
+      <DependentUpon>201502180710165_ThirdMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GoodSamaritan\Configuration.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.Designer.cs">
@@ -294,6 +302,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\GoodSamaritan\201502161436000_InitialCreate.resx">
       <DependentUpon>201502161436000_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201502180625035_SecondDataMigration.resx">
+      <DependentUpon>201502180625035_SecondDataMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201502180710165_ThirdMigration.resx">
+      <DependentUpon>201502180710165_ThirdMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Users\201502180531225_InitialUserCreate.resx">
       <DependentUpon>201502180531225_InitialUserCreate.cs</DependentUpon>
