@@ -26,3 +26,21 @@ Update-Database -TargetMigration:0
 
 In our case, rolling back user seeding would be
 update-database -ConfigurationTypeName ASP_Asn_2_n_3.Migrations.Users.Configuration -TargetMigration:0
+
+---------------------
+Deleting Repo/LocalDB
+---------------------
+http://stackoverflow.com/questions/13001441/delete-mdf-file-from-app-data-causes-exception-cannot-attach-the-file-as-databa
+
+When deleting the project/repo to re-clone, delete LocalDB instance IN SEVER EXPLORER
+first. This will avoid the db being cached and subsequently being unable to run any
+database seed scripts.
+
+In the case that the DB IS CACHED and you CANNOT RUN SEED SCRIPTS, you must stop and
+delete the cached LocalDB instance with the following commands in
+the Package Manager Console:
+
+sqllocaldb.exe stop v11.0
+sqllocaldb.exe delete v11.0
+
+Then re-run your db seed scripts.
