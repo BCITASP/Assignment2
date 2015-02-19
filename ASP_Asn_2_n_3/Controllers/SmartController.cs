@@ -18,7 +18,7 @@ namespace ASP_Asn_2_n_3.Controllers
         // GET: Smart
         public async Task<ActionResult> Index()
         {
-            var smarts = db.Smarts.Include(s => s.BadDateReport).Include(s => s.CityOfAssault).Include(s => s.CityOfResidence).Include(s => s.Clients).Include(s => s.DrugFacilitatedAssault).Include(s => s.EvidenceStored).Include(s => s.HIVMeds).Include(s => s.HospitalAttended).Include(s => s.MedicalOnly).Include(s => s.MultiplePerpetrators).Include(s => s.PoliceAttendance).Include(s => s.PoliceReported).Include(s => s.ReferredToCBVS).Include(s => s.ReferringHospital).Include(s => s.SexWorkExploitation).Include(s => s.SocialWorkAttendance).Include(s => s.ThirdPartyReport);
+            var smarts = db.Smarts.Include(s => s.BadDateReport).Include(s => s.CityOfAssault).Include(s => s.CityOfResidence).Include(s => s.Clients).Include(s => s.DrugFacilitatedAssault).Include(s => s.EvidenceStored).Include(s => s.HIVMeds).Include(s => s.HospitalAttended).Include(s => s.MedicalOnly).Include(s => s.MultiplePerpetrators).Include(s => s.PoliceAttendance).Include(s => s.PoliceReported).Include(s => s.ReferredToCBVS).Include(s => s.ReferringHospital).Include(s => s.SexWorkExploitation).Include(s => s.SocialWorkAttendance).Include(s => s.ThirdPartyReport).Include(s => s.VictimServicesAttendance);
             return View(await smarts.ToListAsync());
         }
 
@@ -57,6 +57,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.SexWorkExploitationId = new SelectList(db.SexWorkExploitations, "SexWorkExploitationId", "YesNoNA");
             ViewBag.SocialWorkAttendanceId = new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA");
             ViewBag.ThirdPartyReportId = new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA");
+            ViewBag.VictimServicesAttendanceId = new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA");
             return View();
         }
 
@@ -91,6 +92,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.SexWorkExploitationId = new SelectList(db.SexWorkExploitations, "SexWorkExploitationId", "YesNoNA", smart.SexWorkExploitationId);
             ViewBag.SocialWorkAttendanceId = new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA", smart.SocialWorkAttendanceId);
             ViewBag.ThirdPartyReportId = new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA", smart.ThirdPartyReportId);
+            ViewBag.VictimServicesAttendanceId = new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA");
             return View(smart);
         }
 
@@ -123,6 +125,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.SexWorkExploitationId = new SelectList(db.SexWorkExploitations, "SexWorkExploitationId", "YesNoNA", smart.SexWorkExploitationId);
             ViewBag.SocialWorkAttendanceId = new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA", smart.SocialWorkAttendanceId);
             ViewBag.ThirdPartyReportId = new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA", smart.ThirdPartyReportId);
+            ViewBag.VictimServicesAttendanceId = new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA");
             return View(smart);
         }
 
@@ -156,6 +159,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.SexWorkExploitationId = new SelectList(db.SexWorkExploitations, "SexWorkExploitationId", "YesNoNA", smart.SexWorkExploitationId);
             ViewBag.SocialWorkAttendanceId = new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA", smart.SocialWorkAttendanceId);
             ViewBag.ThirdPartyReportId = new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA", smart.ThirdPartyReportId);
+            ViewBag.VictimServicesAttendanceId = new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA");
             return View(smart);
         }
 

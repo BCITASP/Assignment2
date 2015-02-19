@@ -44,15 +44,15 @@ namespace ASP_Asn_2_n_3.Migrations.Users
 
             // Create the users
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var User = new ApplicationUser() { UserName = "adam@gs.ca" };
+            var User = new ApplicationUser() { UserName = "adam@gs.ca", Email = "adam@gs.ca" };
             var Result = UserManager.Create(User, "P@$$w0rd");
             UserManager.AddToRole(User.Id, "Administrator");
 
-            User = new ApplicationUser() { UserName = "wendy@gs.ca" };
+            User = new ApplicationUser() { UserName = "wendy@gs.ca", Email = "wendy@gs.ca" };
             Result = UserManager.Create(User, "P@$$w0rd");
             UserManager.AddToRole(User.Id, "Worker");
 
-            User = new ApplicationUser() { UserName = "rob@gs.ca" };
+            User = new ApplicationUser() { UserName = "rob@gs.ca", Email = "rob@gs.ca" };
             Result = UserManager.Create(User, "P@$$w0rd");
             UserManager.AddToRole(User.Id, "Report");
             #endregion
