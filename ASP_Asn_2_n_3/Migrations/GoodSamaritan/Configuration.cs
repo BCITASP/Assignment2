@@ -49,8 +49,7 @@ namespace ASP_Asn_2_n_3.Migrations.GoodSamaritan
             context.RiskLevels.AddOrUpdate(
                 p => p.Level,
                 new RiskLevel {  Level = "High" },
-                new RiskLevel {  Level = "DVU" },
-                new RiskLevel {  Level = "null" }
+                new RiskLevel {  Level = "DVU" }
             );
 
             context.Crises.AddOrUpdate(
@@ -78,8 +77,7 @@ namespace ASP_Asn_2_n_3.Migrations.GoodSamaritan
             context.RiskStatus.AddOrUpdate(
                 p => p.Status,
                 new RiskStatus { Status="Pending" },
-                new RiskStatus { Status="Complete" },
-                new RiskStatus { Status="null" }
+                new RiskStatus { Status="Complete" }
             );
 
             context.AssignedWorkers.AddOrUpdate(
@@ -194,14 +192,12 @@ namespace ASP_Asn_2_n_3.Migrations.GoodSamaritan
 
             context.RepeatClients.AddOrUpdate(
                 p => p.YesOrNull,
-                new RepeatClient { YesOrNull="Yes" },
-                new RepeatClient { YesOrNull="null" }
+                new RepeatClient { YesOrNull="Yes" }
             );
 
             context.DuplicateFiles.AddOrUpdate(
                 p => p.YesOrNull,
-                new DuplicateFile { YesOrNull = "Yes" },
-                new DuplicateFile { YesOrNull = "null" }
+                new DuplicateFile { YesOrNull = "Yes" }
             );
 
             context.StatusOfFiles.AddOrUpdate(
