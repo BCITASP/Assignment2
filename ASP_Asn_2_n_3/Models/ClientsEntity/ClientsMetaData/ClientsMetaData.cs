@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASP_Asn_2_n_3.Models
 {
-    public partial class Clients
+    [MetadataType(typeof(ClientsMetaData))]
+    public partial class Clients { }
+    
+    public class ClientsMetaData
     {
-        [Key]
         public int ClientReferenceNumber { get; set; }
         public virtual int FiscalYearId { get; set; }
         public virtual int Month { get; set; }
@@ -30,7 +33,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int ProgramId { get; set; }
 
         [MaxLength(50)]
-        public virtual string RiskAssessmentAssignedTo {get; set;}
+        public virtual string RiskAssessmentAssignedTo { get; set; }
         public virtual int RiskStatusId { get; set; }
         public virtual int AssignedWorkerId { get; set; }
         public virtual int ReferralSourceId { get; set; }
@@ -41,12 +44,12 @@ namespace ASP_Asn_2_n_3.Models
         public virtual string AbuserSurnameFirstName { get; set; }
         public virtual int AbuserRelationshipId { get; set; }
         public virtual int VictimOfIncidentId { get; set; }
-        public virtual int FamilyViolenceFileId {get; set;}
+        public virtual int FamilyViolenceFileId { get; set; }
 
         [MaxLength(5)]
         public virtual string Gender { get; set; }
         public virtual int EthnicityId { get; set; }
-        public virtual int AgeId {get; set;}
+        public virtual int AgeId { get; set; }
         public virtual int RepeatClientId { get; set; }
         public virtual int DuplicateFileId { get; set; }
         public virtual int NumberOfChildren0to6 { get; set; }
@@ -64,6 +67,8 @@ namespace ASP_Asn_2_n_3.Models
         public virtual Service Service { get; set; }
         public virtual Program Program { get; set; }
         public virtual RiskStatus RiskStatus { get; set; }
+
+        [Display(Name="Assigned Worker")]
         public virtual AssignedWorker AssignedWorker { get; set; }
         public virtual ReferralSource ReferralSource { get; set; }
         public virtual ReferralContact ReferralContact { get; set; }
