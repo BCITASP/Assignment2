@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASP_Asn_2_n_3.Models
 {
@@ -13,8 +14,14 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int FiscalYearId { get; set; }
         public virtual int Month { get; set; }
         public virtual int Day { get; set; }
+
+        [MaxLength(50)]
         public virtual string Surname { get; set; }
+
+        [MaxLength(50)]
         public virtual string FirstName { get; set; }
+
+        [MaxLength(8)]
         public virtual string PoliceFileNumber { get; set; }
         public virtual int CourtFileNumber { get; set; }
         public virtual int SWCFileNumber { get; set; }
@@ -22,16 +29,22 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int CrisisId { get; set; }
         public virtual int ServiceId { get; set; }
         public virtual int ProgramId { get; set; }
+
+        [MaxLength(50)]
         public virtual string RiskAssessmentAssignedTo {get; set;}
         public virtual int RiskStatusId { get; set; }
         public virtual int AssignedWorkerId { get; set; }
         public virtual int ReferralSourceId { get; set; }
         public virtual int ReferralContactId { get; set; }
         public virtual int IncidentId { get; set; }
+
+        [MaxLength(100)]
         public virtual string AbuserSurnameFirstName { get; set; }
         public virtual int AbuserRelationshipId { get; set; }
         public virtual int VictimOfIncidentId { get; set; }
         public virtual int FamilyViolenceFileId {get; set;}
+
+        [MaxLength(5)]
         public virtual string Gender { get; set; }
         public virtual int EthnicityId { get; set; }
         public virtual int AgeId {get; set;}
