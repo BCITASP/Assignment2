@@ -212,6 +212,18 @@
     <Compile Include="Migrations\GoodSamaritan\201502180710165_ThirdMigration.Designer.cs">
       <DependentUpon>201502180710165_ThirdMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201503032252323_FourthMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201503032252323_FourthMigration.Designer.cs">
+      <DependentUpon>201503032252323_FourthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201503032317463_FifthMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201503032317463_FifthMigration.Designer.cs">
+      <DependentUpon>201503032317463_FifthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201503040758449_SixthMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201503040758449_SixthMigration.Designer.cs">
+      <DependentUpon>201503040758449_SixthMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GoodSamaritan\Configuration.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.Designer.cs">
@@ -223,6 +235,24 @@
     <Compile Include="Models\ClientsEntity\Age.cs" />
     <Compile Include="Models\ClientsEntity\AssignedWorker.cs" />
     <Compile Include="Models\ClientsEntity\Clients.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\AbuserRelationshipMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\AgeMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\AssignedWorkerMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\CrisisMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\DuplicateFileMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\EthnicityMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\FamilyViolenceFileMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\FiscalYearMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\IncidentMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\ProgramMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\ReferralContactMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\ReferralSourceMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\RepeatClientMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\RiskLevelMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\RiskStatusMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\ServiceMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\StatusOfFileMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\VictimOfIncidentMetaData.cs" />
     <Compile Include="Models\ClientsEntity\Crisis.cs" />
     <Compile Include="Models\ClientsEntity\DuplicateFile.cs" />
     <Compile Include="Models\ClientsEntity\Ethnicity.cs" />
@@ -255,6 +285,23 @@
     <Compile Include="Models\SmartEntity\ReferringHospital.cs" />
     <Compile Include="Models\SmartEntity\SexWorkExploitation.cs" />
     <Compile Include="Models\SmartEntity\Smart.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\BadDateReportMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\CityOfAssaultMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\CityOfResidenceMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\DrugFacilitatedAssaultMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\EvidenceStoredMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\HIVMedsMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\HospitalAttendedMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\MedicalOnlyMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\MultiplePerpetratorsMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\PoliceAttendanceMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\PoliceReportedMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\ReferredToCBVSMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\ReferringHospitalMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\SexWorkExploitationMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\SocialWorkAttendanceMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\ThirdPartyReportMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\VictimServicesAttendanceMetaData.cs" />
     <Compile Include="Models\SmartEntity\SocialWorkAttendance.cs" />
     <Compile Include="Models\SmartEntity\ThirdPartyReport.cs" />
     <Compile Include="Models\SmartEntity\VictimServicesAttendance.cs" />
@@ -520,6 +567,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\GoodSamaritan\201502180710165_ThirdMigration.resx">
       <DependentUpon>201502180710165_ThirdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201503032252323_FourthMigration.resx">
+      <DependentUpon>201503032252323_FourthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201503032317463_FifthMigration.resx">
+      <DependentUpon>201503032317463_FifthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201503040758449_SixthMigration.resx">
+      <DependentUpon>201503040758449_SixthMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Users\201502180531225_InitialUserCreate.resx">
       <DependentUpon>201502180531225_InitialUserCreate.cs</DependentUpon>
