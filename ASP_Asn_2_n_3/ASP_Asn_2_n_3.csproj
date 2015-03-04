@@ -224,6 +224,10 @@
     <Compile Include="Migrations\GoodSamaritan\201503040758449_SixthMigration.Designer.cs">
       <DependentUpon>201503040758449_SixthMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\GoodSamaritan\201503041915350_SeventhMigration.cs" />
+    <Compile Include="Migrations\GoodSamaritan\201503041915350_SeventhMigration.Designer.cs">
+      <DependentUpon>201503041915350_SeventhMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GoodSamaritan\Configuration.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.cs" />
     <Compile Include="Migrations\Users\201502180531225_InitialUserCreate.Designer.cs">
@@ -238,6 +242,7 @@
     <Compile Include="Models\ClientsEntity\ClientsMetaData\AbuserRelationshipMetaData.cs" />
     <Compile Include="Models\ClientsEntity\ClientsMetaData\AgeMetaData.cs" />
     <Compile Include="Models\ClientsEntity\ClientsMetaData\AssignedWorkerMetaData.cs" />
+    <Compile Include="Models\ClientsEntity\ClientsMetaData\ClientsMetaData.cs" />
     <Compile Include="Models\ClientsEntity\ClientsMetaData\CrisisMetaData.cs" />
     <Compile Include="Models\ClientsEntity\ClientsMetaData\DuplicateFileMetaData.cs" />
     <Compile Include="Models\ClientsEntity\ClientsMetaData\EthnicityMetaData.cs" />
@@ -576,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\GoodSamaritan\201503040758449_SixthMigration.resx">
       <DependentUpon>201503040758449_SixthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\GoodSamaritan\201503041915350_SeventhMigration.resx">
+      <DependentUpon>201503041915350_SeventhMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Users\201502180531225_InitialUserCreate.resx">
       <DependentUpon>201502180531225_InitialUserCreate.cs</DependentUpon>
