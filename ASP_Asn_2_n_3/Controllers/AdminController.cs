@@ -61,13 +61,55 @@ namespace ASP_Asn_2_n_3.Controllers
 
         public ActionResult Suspend()
         {
+            if(TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+            
+            var context = new ApplicationDbContext();
+
+            // Get users who have lockout enabled and are not currently suspended
+            List<string> usernames = (
+                from c in context.Users
+                where c.LockoutEnabled == true
+                where ((c.LockoutEndDateUtc <= DateTime.Now) || (c.LockoutEndDateUtc == null))
+                select new { c.Email, c.Id }).Select(m => m.Email).ToList();
+
+            // create list of all users to be used in SelectList
+            List<SelectListItem> usersSL = new List<SelectListItem>();
+            foreach (string user in usernames)
+            {
+                usersSL.Add(new SelectListItem { Text = user, Value = user });
+            }
+
+            ViewBag.Users = usersSL;
+
             return View();
         }
 
         [HttpPost]
         public ActionResult SuspendUser()
         {
-            return View();
+            // get username from post and create UserManager
+            string username = Request.Form["Users"];
+
+            if(username == null)
+            {
+                return RedirectToAction("Suspend");
+            }
+
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            // Set LockoutEndDate to an ureasonable date in the future
+            // to suspend the selected user indefinitely
+            DateTime dt = new DateTime(4999, 01, 01, 00, 00, 00);
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            UserManager.SetLockoutEndDateAsync(username, dto);
+
+            TempData["Message"] = String.Format("User {0} has been suspended", username);
+            
+            return RedirectToAction("Suspend");
         }
 
         public ActionResult Unsuspend()

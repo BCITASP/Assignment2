@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Suspend";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron">
+    <h1>Suspend A User</h1>
+    @using (Html.BeginForm("SuspendUser", "Admin"))
+    {
+        <fieldset>
+            Users
+            @Html.DropDownList("Users")
+            <br />
+            <input type="submit" value="Suspend User" />
+        </fieldset>
+    }
+</div>
