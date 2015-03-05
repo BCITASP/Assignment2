@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron">
+    <h1>Add User To Role</h1>
+    @using (Html.BeginForm("AddRole", "Admin"))
+    {
+        <fieldset>
+            Users
+            @Html.DropDownList("Users")
+            <br />
+            Roles
+            @Html.DropDownList("Roles")
+            <br />
+            <input type="submit" value="Add role" />
+        </fieldset>
+    }
+</div>
