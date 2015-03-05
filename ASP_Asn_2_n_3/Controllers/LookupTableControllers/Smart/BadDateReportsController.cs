@@ -10,6 +10,7 @@ using ASP_Asn_2_n_3.Models;
 
 namespace ASP_Asn_2_n_3.Controllers.LookupTableControllers.Client
 {
+    [Authorize(Roles = "Administrator")]
     public class BadDateReportsController : Controller
     {
         private GoodSamaritanContext db = new GoodSamaritanContext();

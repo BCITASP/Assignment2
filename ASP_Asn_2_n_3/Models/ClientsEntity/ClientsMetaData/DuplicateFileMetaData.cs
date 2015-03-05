@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int DuplicateFileId { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        [Display(Name = "Duplicate File Status")]
         [MaxLength(3, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public virtual string YesOrNull { get; set; }
     }

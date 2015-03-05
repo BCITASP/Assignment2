@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int ReferralContactId { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        [Display(Name = "Referral Contact")]
         [MaxLength(20, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public virtual string Contact { get; set; }
     }
