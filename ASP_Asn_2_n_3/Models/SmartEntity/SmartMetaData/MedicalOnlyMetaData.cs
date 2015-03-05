@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int MedicalOnlyId { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        [Display(Name = "Medical Only Status")]
         [MaxLength(3, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public virtual string YesNoNA { get; set; }
     }

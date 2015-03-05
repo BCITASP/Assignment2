@@ -10,6 +10,7 @@ using ASP_Asn_2_n_3.Models;
 
 namespace ASP_Asn_2_n_3.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AssignedWorkersController : Controller
     {
         private GoodSamaritanContext db = new GoodSamaritanContext();
