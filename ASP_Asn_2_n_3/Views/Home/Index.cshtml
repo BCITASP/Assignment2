@@ -5,11 +5,40 @@
 <div class="jumbotron">
     <h1>The Good Samaritan</h1>
     <p class="lead">Welcome to The Good Samaritan! We are a charity organization that aim to help victims of abuse.</p>
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Administrator"))
+        {
+            <p>
+                <a href="Admin/Users" class="btn btn-primary btn-lg">Manage Users</a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="Admin/Roles" class="btn btn-primary btn-lg">Manage Roles</a>
+            </p>
+        }
+        else if (User.IsInRole("Worker"))
+        {
+            <p>
+                <a href="" class="btn btn-primary btn-lg">Enter / Update Client Data</a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="" class="btn btn-primary btn-lg">Generate Report</a>
+            </p>
+        }
+        else if (User.IsInRole("Reporter"))
+        {
+            <p>
+                <a href="" class="btn btn-primary btn-lg">Generate Report</a>
+            </p>
+        }
+    }
+    else
+    {
     <p>
         <a href="Account/Register" class="btn btn-primary btn-lg">Register</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="Account/Login" class="btn btn-primary btn-lg">Log In</a>
     </p>
+    }
 </div>
 
 <!--

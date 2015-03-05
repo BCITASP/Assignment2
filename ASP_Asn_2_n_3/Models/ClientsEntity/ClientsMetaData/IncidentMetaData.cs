@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int IncidentId { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        [Display(Name = "Incident Type")]
         [MaxLength(50, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public virtual string Type { get; set; }
     }

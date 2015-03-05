@@ -24,8 +24,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if(User.IsInRole("Administrator"))
-                    { 
+                    @if (User.IsInRole("Administrator"))
+                    {
+                    <li>@Html.ActionLink("Manage Users", "Admin", "Users")</li>
+                    <li>@Html.ActionLink("Manage Roles", "Admin", "Roles")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu1" aria-expanded="false">Lookup Tables<span class="caret"></span></a>
                             <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -66,6 +68,15 @@
                                 <li role="presentation">@Html.ActionLink("Victim Services Attendance", "Index", "VictimServicesAttendances")</li>
                             </ul>
                     </li>
+                    }
+                    else if (User.IsInRole("Worker"))
+                    {
+                        <li>@Html.ActionLink("Enter / Update Client Data", "", "")</li>
+                        <li>@Html.ActionLink("Generate Report", "", "")</li>
+                    }
+                    else if (User.IsInRole("Reporter"))
+                    {
+                        <li>@Html.ActionLink("Generate Report", "", "")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -40,7 +40,7 @@ namespace ASP_Asn_2_n_3.Migrations.Users
 
             RoleManager.Create(new IdentityRole("Administrator"));
             RoleManager.Create(new IdentityRole("Worker"));
-            RoleManager.Create(new IdentityRole("Report"));
+            RoleManager.Create(new IdentityRole("Reporter"));
 
             // Create the users
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -54,7 +54,7 @@ namespace ASP_Asn_2_n_3.Migrations.Users
 
             User = new ApplicationUser() { UserName = "rob@gs.ca", Email = "rob@gs.ca" };
             Result = UserManager.Create(User, "P@$$w0rd");
-            UserManager.AddToRole(User.Id, "Report");
+            UserManager.AddToRole(User.Id, "Reporter");
             #endregion
         }
     }

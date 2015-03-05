@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int RiskStatusId { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        [Display(Name = "Risk Status")]
         [MaxLength(10, ErrorMessage = "{0} cannot be longer than {1} characters.")]
         public virtual string Status { get; set; }
     }
