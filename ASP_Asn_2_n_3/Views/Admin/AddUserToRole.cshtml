@@ -10,7 +10,7 @@
         string message = ViewBag.Message;
         @message;
     }
-    @using (Html.BeginForm("AddRole", "Admin"))
+    @using (Html.BeginForm("AddUserToRoleCommit", "Admin"))
     {
         <fieldset>
             Users
@@ -22,5 +22,5 @@
             <input type="submit" value="Add role" />
         </fieldset>
     }
-    @Html.ActionLink("Remove Roles", "Remove")
+    @Html.ActionLink("Remove Roles", "RemoveUserFromRole")
 </div>
