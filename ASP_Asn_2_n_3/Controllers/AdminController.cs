@@ -125,6 +125,40 @@ namespace ASP_Asn_2_n_3.Controllers
             return usersSL;
         }
 
+        private List<SelectListItem> GetUnsuspendedUsersList()
+        {
+            var context = new ApplicationDbContext();
+            var users =
+                from c in context.Users
+                where c.LockoutEnabled == true
+                where ((c.LockoutEndDateUtc <= DateTime.Now) || (c.LockoutEndDateUtc == null))
+                select new { c.Email, c.Id };
+
+            List<SelectListItem> usersSL = new List<SelectListItem>();
+            foreach (var user in users)
+            {
+                usersSL.Add(new SelectListItem { Text = user.Email, Value = user.Id });
+            }
+            return usersSL;
+        }
+
+        private List<SelectListItem> GetSuspendedUsersList()
+        {
+            var context = new ApplicationDbContext();
+            var users =
+                from c in context.Users
+                where c.LockoutEnabled == true
+                where c.LockoutEndDateUtc > DateTime.Now
+                select new { c.Email, c.Id };
+
+            List<SelectListItem> usersSL = new List<SelectListItem>();
+            foreach (var user in users)
+            {
+                usersSL.Add(new SelectListItem { Text = user.Email, Value = user.Id });
+            }
+            return usersSL;
+        }
+
         private List<SelectListItem> GetRolesList()
         {
             var context = new ApplicationDbContext();
@@ -178,24 +212,96 @@ namespace ASP_Asn_2_n_3.Controllers
 
         public ActionResult Suspend()
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
+            var context = new ApplicationDbContext();
+
+            // Get users who have lockout enabled and are not currently suspended
+            List<SelectListItem> usersSL = GetUnsuspendedUsersList();
+            ViewBag.Users = usersSL;
+
             return View();
         }
 
         [HttpPost]
         public ActionResult SuspendUser()
         {
-            return View();
+            // get username from post and create UserManager
+            string userid = Request.Form["Users"];
+
+            if (userid == null)
+            {
+                TempData["Message"] = String.Format("User selected was null");
+                return RedirectToAction("Suspend");
+            }
+
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            // Set LockoutEndDate to an ureasonable date in the future
+            // to suspend the selected user indefinitely
+            DateTime dt = new DateTime(5000, 01, 01);
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            UserManager.SetLockoutEndDateAsync(userid, dto);
+
+            string username = GetUsernameById(userid);
+
+            // add message to tempdata and requery for unsuspended users
+            TempData["Message"] = String.Format("User {0} has been suspended", username);
+            List<SelectListItem> usersSL = GetUnsuspendedUsersList();
+            ViewBag.Users = usersSL;
+
+            return RedirectToAction("Suspend");
         }
 
         public ActionResult Unsuspend()
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
+            var context = new ApplicationDbContext();
+
+            // Get users who have lockout enabled and are currently suspended
+            List<SelectListItem> usersSL = GetSuspendedUsersList();
+            ViewBag.Users = usersSL;
+
             return View();
         }
 
         [HttpPost]
         public ActionResult UnsuspendUser()
         {
-            return View();
+            // get username from post and create UserManager
+            string userid = Request.Form["Users"];
+
+            if (userid == null)
+            {
+                TempData["Message"] = String.Format("User selected was null");
+                return RedirectToAction("Unsuspend");
+            }
+
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            // Set LockoutEndDate to the a DateTime value in the past
+            // to unsuspend a user
+            DateTime dt = new DateTime(2000, 01, 01);
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            UserManager.SetLockoutEndDateAsync(userid, dto);
+
+            string username = GetUsernameById(userid);
+
+            // set message and re-query for suspended users
+            TempData["Message"] = String.Format("User {0} has been unsuspended", username);
+            List<SelectListItem> usersSL = GetSuspendedUsersList();
+            ViewBag.Users = usersSL;
+
+            return RedirectToAction("Unsuspend");
         }
     }
 
