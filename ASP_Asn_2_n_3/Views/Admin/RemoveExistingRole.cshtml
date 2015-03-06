@@ -1,13 +1,15 @@
-﻿@{
-    ViewBag.Title = "RemoveRole2";
+﻿
+@{
+    ViewBag.Title = "Remove Existing Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Remove Existing Role</h2>
 <div class="jumbotron">
     <h2>Choose a Role to Remove</h2>
-    @using (Html.BeginForm("RemoveRole", "Admin"))
+    @using (Html.BeginForm("RemoveExistingRoleCommit", "Admin"))
     {
         <fieldset>
-            @Html.Hidden("userid", (object)ViewBag.UserId.ToString())
             Roles
             @Html.DropDownList("Roles")
             <br />
