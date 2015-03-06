@@ -60,6 +60,12 @@ namespace ASP_Asn_2_n_3.Controllers
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
+                    if(user.LockoutEnabled && user.LockoutEndDateUtc > DateTime.Now)
+                    {
+                        ModelState.AddModelError("", "This account is locked out. Please contact the administrator for help.");
+                        return View(model);
+                    }
+                        
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
@@ -90,7 +96,7 @@ namespace ASP_Asn_2_n_3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, LockoutEnabled = true };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
