@@ -16,7 +16,7 @@ namespace ASP_Asn_2_n_3.Controllers
         // Redirect default to Roles
         public ActionResult Index()
         {
-            return RedirectToAction("Roles");
+            return RedirectToAction("AddUserToRole");
         }
 
         // GET: Admin/ManageRoles
@@ -32,7 +32,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Admin
-        public ActionResult Roles()
+        public ActionResult AddUserToRole()
         {
             if (TempData.ContainsKey("Message"))
             {
@@ -44,13 +44,13 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRole()
+        public ActionResult AddUserToRoleCommit()
         {
             string userid = Request.Form["Users"];
             string role = Request.Form["Roles"];
             // If either is null, function was accessed directly
             if (userid == null || role == null)
-            { return RedirectToAction("Roles"); }
+            { return RedirectToAction("AddUserToRole"); }
 
             var context = new ApplicationDbContext();
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
@@ -66,33 +66,33 @@ namespace ASP_Asn_2_n_3.Controllers
             {
                 TempData["Message"] = String.Format("User {0} already exists in role {1}", username, role);
             }
-            return RedirectToAction("Roles");
+            return RedirectToAction("AddUserToRole");
         }
 
-        public ActionResult Remove()
+        public ActionResult RemoveUserFromRole()
         {
             if (TempData.ContainsKey("Message"))
             {
                 ViewBag.Message = TempData["Message"];
             }
             ViewBag.Users = GetUsersList();
-            return View("RemoveRole1");
+            return View("RemoveUserFromRole1");
         }
 
-        public ActionResult RemoveChooseRole()
+        public ActionResult RemoveUserFromRoleChooseRole()
         {
             if (Request.Form["Users"] == null)
             {
-                return RedirectToAction("Remove");
+                return RedirectToAction("RemoveRoleFromUser");
             }
             string userid = Request.Form["Users"];
             ViewBag.UserId = userid;
             ViewBag.Roles = GetRolesById(userid);
-            return View("RemoveRole2");
+            return View("RemoveUserFromRole2");
         }
 
         [HttpPost]
-        public ActionResult RemoveRole()
+        public ActionResult RemoveUserFromRoleCommit()
         {
             string userid = Request.Form["userid"];
             string role = Request.Form["Roles"];
@@ -100,7 +100,7 @@ namespace ASP_Asn_2_n_3.Controllers
             // If either is null, this function was accessed directly
             if (userid == null || role == null)
             {
-                return RedirectToAction("Remove");
+                return RedirectToAction("RemoveUserFromRole");
             }
 
             string username = GetUsernameById(userid);
@@ -111,7 +111,7 @@ namespace ASP_Asn_2_n_3.Controllers
                 {
                     TempData["Message"] = String.Format("Cannot remove user {0} from role {1} because " +
                                             "he or she is the last Administrator", username, role);
-                    return RedirectToAction("Remove");
+                    return RedirectToAction("RemoveUserFromRole");
                 }
             }
             
@@ -121,7 +121,61 @@ namespace ASP_Asn_2_n_3.Controllers
             UserManager.RemoveFromRole(userid, role);
             TempData["Message"] = String.Format("User {0} has been removed from role {1}", username, role);
 
-            return RedirectToAction("Remove");
+            return RedirectToAction("RemoveUserFromRole");
+        }
+
+        public ActionResult AddNewRole()
+        {
+            ViewBag.Roles = GetRolesList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewRoleCommit()
+        {
+            string role = Request.Form["Roles"];
+            var context = new ApplicationDbContext();
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (RoleManager.FindByName(role) != null)
+            {
+                ViewBag.Message = String.Format("Role {0} already exists!", role);
+                return RedirectToAction("AddNewRole");
+            }
+            RoleManager.Create(new IdentityRole(role));
+            ViewBag.Message = String.Format("Role {0} was created.", role);
+            return RedirectToAction("AddNewRole");
+        }
+
+        public ActionResult RemoveExistingRole()
+        {
+            ViewBag.Roles = GetRolesList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RemoveExistingRoleCommit()
+        {
+            // Check if Administrator role is being deleted, if so, deny it
+            string role = Request.Form["Roles"];
+            if(role == "Administrator")
+            {
+                ViewBag.Message = "Cannot delete the Administrator role";
+                return RedirectToAction("RemoveExistingRole");
+            }
+            // Begin removing all users from the role first
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            var usersInRole = RoleManager.FindByName(role).Users;
+            foreach (var user in usersInRole)
+            {
+                UserManager.RemoveFromRole(user.UserId, role);
+            }
+
+            // Remove the role itself
+            RoleManager.Delete(RoleManager.FindByName(role));
+            return RedirectToAction("RemoveExistingRole");
         }
 
         private List<SelectListItem> GetUsersList()
@@ -304,7 +358,7 @@ namespace ASP_Asn_2_n_3.Controllers
             // to unsuspend a user
             DateTime dt = new DateTime(2000, 01, 01);
             DateTimeOffset dto = new DateTimeOffset(dt);
-            UserManager.SetLockoutEndDateAsync(userid, dto);
+            UserManager.SetLockoutEndDate(userid, dto);
 
             string username = GetUsernameById(userid);
 
