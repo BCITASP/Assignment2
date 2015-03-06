@@ -163,8 +163,18 @@ namespace ASP_Asn_2_n_3.Controllers
                 return RedirectToAction("RemoveExistingRole");
             }
             // Begin removing all users from the role first
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            var usersInRole = RoleManager.FindByName(role).Users;
+            foreach (var user in usersInRole)
+            {
+                UserManager.RemoveFromRole(user.UserId, role);
+            }
 
             // Remove the role itself
+            RoleManager.Delete(RoleManager.FindByName(role));
             return RedirectToAction("RemoveExistingRole");
         }
 
@@ -348,7 +358,7 @@ namespace ASP_Asn_2_n_3.Controllers
             // to unsuspend a user
             DateTime dt = new DateTime(2000, 01, 01);
             DateTimeOffset dto = new DateTimeOffset(dt);
-            UserManager.SetLockoutEndDateAsync(userid, dto);
+            UserManager.SetLockoutEndDate(userid, dto);
 
             string username = GetUsernameById(userid);
 
