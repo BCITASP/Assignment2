@@ -26,8 +26,8 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Administrator"))
                     {
-                    <li>@Html.ActionLink("Manage Users", "Admin", "Users")</li>
-                    <li>@Html.ActionLink("Manage Roles", "Admin", "Roles")</li>
+                    <li>@Html.ActionLink("Manage Users", "Suspend", "Admin")</li>
+                    <li>@Html.ActionLink("Manage Roles", "Roles", "Admin")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu1" aria-expanded="false">Lookup Tables<span class="caret"></span></a>
                             <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenu1">

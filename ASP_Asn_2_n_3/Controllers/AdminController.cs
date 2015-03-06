@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ASP_Asn_2_n_3.Controllers
 {
-    //[Authorize(Roles="Administrator")]
+    [Authorize(Roles="Administrator")]
     public class AdminController : Controller
     {
         // Redirect default to Roles
@@ -245,7 +245,7 @@ namespace ASP_Asn_2_n_3.Controllers
             // to suspend the selected user indefinitely
             DateTime dt = new DateTime(5000, 01, 01);
             DateTimeOffset dto = new DateTimeOffset(dt);
-            UserManager.SetLockoutEndDateAsync(userid, dto);
+            UserManager.SetLockoutEndDate(userid, dto);
 
             string username = GetUsernameById(userid);
 
