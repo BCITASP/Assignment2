@@ -19,6 +19,18 @@ namespace ASP_Asn_2_n_3.Controllers
             return RedirectToAction("Roles");
         }
 
+        // GET: Admin/ManageRoles
+        public ActionResult ManageRoles()
+        {
+            return View();
+        }
+
+        // GET: Admin/ManageUsers
+        public ActionResult ManageUsers()
+        {
+            return View();
+        }
+
         // GET: Admin
         public ActionResult Roles()
         {
