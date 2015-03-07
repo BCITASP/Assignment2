@@ -6,14 +6,19 @@
 
 <h2>Remove Existing Role</h2>
 <div class="jumbotron">
+    <p>
+        @Html.ActionLink("<< Manage Roles", "ManageRoles")
+    </p>
     <h2>Choose a Role to Remove</h2>
-    @using (Html.BeginForm("RemoveExistingRoleCommit", "Admin"))
-    {
-        <fieldset>
-            Roles
-            @Html.DropDownList("Roles")
-            <br />
-            <input type="submit" value="Remove Role" />
-        </fieldset>
-    }
+    <p>
+        @using (Html.BeginForm("RemoveExistingRoleCommit", "Admin"))
+        {
+            <fieldset>
+                @Html.Label("Roles")
+                @Html.DropDownList("Roles")
+                <input type="submit" value="Remove Role" />
+            </fieldset>
+        }
+    </p>
+    @Html.ActionLink("Add New Roles", "AddNewRole")
 </div>

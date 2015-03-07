@@ -3,7 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="jumbotron">
-    <h1>Unsuspend A User</h1>
+    <p>
+        @Html.ActionLink("<< Manage Users", "ManageUsers")
+    </p>
+    <h2>Unsuspend A User</h2>
     @if (ViewBag.Message != null)
     {
         string message = ViewBag.Message;
@@ -12,11 +15,10 @@
     @using (Html.BeginForm("UnsuspendUser", "Admin"))
     {
         <fieldset>
-            Users
+            @Html.Label("Users")
             @Html.DropDownList("Users")
-            <br />
             <input type="submit" value="Unsuspend User" />
         </fieldset>
-        @Html.ActionLink("Suspend Users", "Suspend");
     }
+    @Html.ActionLink("Suspend Users", "Suspend")
 </div>

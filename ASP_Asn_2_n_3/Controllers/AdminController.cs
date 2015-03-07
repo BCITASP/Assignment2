@@ -126,14 +126,13 @@ namespace ASP_Asn_2_n_3.Controllers
 
         public ActionResult AddNewRole()
         {
-            ViewBag.Roles = GetRolesList();
             return View();
         }
 
         [HttpPost]
         public ActionResult AddNewRoleCommit()
         {
-            string role = Request.Form["Roles"];
+            string role = Request.Form["Role"];
             var context = new ApplicationDbContext();
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             if (RoleManager.FindByName(role) != null)
@@ -167,10 +166,16 @@ namespace ASP_Asn_2_n_3.Controllers
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            var usersInRole = RoleManager.FindByName(role).Users;
+            //var usersInRole = RoleManager.FindByName(role).Users;
+            string roleID = RoleManager.FindByName(role).Id;
+            var usersInRole =  
+                from user in context.Users
+                where user.Roles.Any(r => r.RoleId == roleID)
+                select user.Id;
+            
             foreach (var user in usersInRole)
             {
-                UserManager.RemoveFromRole(user.UserId, role);
+                UserManager.RemoveFromRole(user, role);
             }
 
             // Remove the role itself
