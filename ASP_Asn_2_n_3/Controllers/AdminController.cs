@@ -130,6 +130,11 @@ namespace ASP_Asn_2_n_3.Controllers
 
         public ActionResult AddNewRole()
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             return View();
         }
 
@@ -141,16 +146,21 @@ namespace ASP_Asn_2_n_3.Controllers
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             if (RoleManager.FindByName(role) != null)
             {
-                ViewBag.Message = String.Format("Role {0} already exists!", role);
+                TempData["Message"] = String.Format("Role {0} already exists!", role);
                 return RedirectToAction("AddNewRole");
             }
             RoleManager.Create(new IdentityRole(role));
-            ViewBag.Message = String.Format("Role {0} was created.", role);
+            TempData["Message"] = String.Format("Role {0} was created.", role);
             return RedirectToAction("AddNewRole");
         }
 
         public ActionResult RemoveExistingRole()
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             ViewBag.Roles = GetRolesList();
             return View();
         }
@@ -162,7 +172,7 @@ namespace ASP_Asn_2_n_3.Controllers
             string role = Request.Form["Roles"];
             if(role == "Administrator")
             {
-                ViewBag.Message = "Cannot delete the Administrator role";
+                TempData["Message"] = "Cannot delete the Administrator role";
                 return RedirectToAction("RemoveExistingRole");
             }
             // Begin removing all users from the role first
@@ -184,6 +194,7 @@ namespace ASP_Asn_2_n_3.Controllers
 
             // Remove the role itself
             RoleManager.Delete(RoleManager.FindByName(role));
+            TempData["Message"] = String.Format("Role {0} deleted successfully.", role);
             return RedirectToAction("RemoveExistingRole");
         }
 
