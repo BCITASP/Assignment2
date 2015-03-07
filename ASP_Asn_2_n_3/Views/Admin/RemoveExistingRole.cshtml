@@ -11,6 +11,11 @@
     </p>
     <h2>Choose a Role to Remove</h2>
     <p>
+        @if (ViewBag.Message != null)
+        {
+            string message = ViewBag.Message;
+            @message;
+        }
         @using (Html.BeginForm("RemoveExistingRoleCommit", "Admin"))
         {
             <fieldset>
