@@ -60,6 +60,8 @@ namespace ASP_Asn_2_n_3.Controllers
             if (!roles.Contains(role)) // User is not already in the role being assigned
             {
                 UserManager.AddToRole(userid, role);
+                context.SaveChanges();
+
                 TempData["Message"] = String.Format("User {0} has been added to role {1}", username, role);
             }
             else
@@ -119,6 +121,8 @@ namespace ASP_Asn_2_n_3.Controllers
             var context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserManager.RemoveFromRole(userid, role);
+            context.SaveChanges();
+
             TempData["Message"] = String.Format("User {0} has been removed from role {1}", username, role);
 
             return RedirectToAction("RemoveUserFromRole");
