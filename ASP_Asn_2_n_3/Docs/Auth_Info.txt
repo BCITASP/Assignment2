@@ -1,0 +1,4 @@
+﻿See URL:
+http://www.asp.net/web-api/overview/security/individual-accounts-in-web-api
+
+Under Get an Access Token
