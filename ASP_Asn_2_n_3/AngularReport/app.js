@@ -21,7 +21,7 @@
                 .success(function (response) {
                     $scope.report = response;
                     $scope.showlogin = false;
-                    $scope.showMonthYear = true;
+                    getMonthYear();
                 })
                 .error(function (response) {
                     $scope.loginerror = response.error_description;
@@ -34,6 +34,7 @@
                 var json = JSON.stringify(response);
                 var parser = JSON.parse(json);
                 $scope.yearData = response;
+                $scope.showMonthYear = true;
             });
         }
 
@@ -77,13 +78,12 @@
                     $scope.age12_19 = response.age12_19;
                     $scope.age13 = response.age13;
                     $scope.age64 = response.age64;
+
+                    $scope.showreport = true;
                 });
         }
 
         $scope.showlogin = true;
-        getMonthYear();
-        $scope.showMonthYear = true;
-        $scope.showreport = true;
     };
 
 

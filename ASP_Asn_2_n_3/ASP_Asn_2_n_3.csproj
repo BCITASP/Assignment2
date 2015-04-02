@@ -297,7 +297,6 @@
     <Compile Include="Models\ClientsEntity\RiskStatus.cs" />
     <Compile Include="Models\ClientsEntity\Service.cs" />
     <Compile Include="Models\ClientsEntity\VictimOfIncident.cs" />
-    <Compile Include="Models\CreateRecordModel.cs" />
     <Compile Include="Models\SmartEntity\BadDateReport.cs" />
     <Compile Include="Models\SmartEntity\CityOfAssault.cs" />
     <Compile Include="Models\SmartEntity\CityOfResidence.cs" />
