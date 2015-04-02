@@ -4,8 +4,28 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<script>
+    $(document).ready(function () {
+        $('#smartdataform').hide();
 
+        if ($('#ProgramId :selected').text() == 'SMART') {
+            $('#smartdataform').show();
+        } else {
+            $('#smartdataform').hide();
+        }
+
+        $('#ProgramId').change(function () {
+            if ($('#ProgramId :selected').text() == 'SMART') {
+                $('#smartdataform').show();
+            } else {
+                $('#smartdataform').hide();
+            }
+        });
+    });
+</script>
+
+
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
@@ -289,11 +309,17 @@
             </div>
         </div>
 
+        <!-- Div to contain SMART program data. Shown only if SMART is selected -->
+        <div id="smartdataform" display="none">
+            @Html.Partial("_createSmart", new ASP_Asn_2_n_3.Models.Smart())
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+        
     </div>
 }
 

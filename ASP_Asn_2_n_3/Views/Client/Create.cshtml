@@ -4,6 +4,22 @@
     ViewBag.Title = "Create";
 }
 
+<script>
+    $(document).ready(function(){
+        $('#smartdataform').hide();
+
+        $('#ProgramId').change(function () {
+            if ($('#ProgramId :selected').text() == 'SMART') {
+                $('#smartdataform').show();
+            } else {
+                $('#smartdataform').hide();
+            }
+        });
+    });    
+</script>
+
+
+
 <h2>Create</h2>
 
 
@@ -12,7 +28,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Clients</h4>
+        <br/>
+        <h4>Client Data</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -285,6 +302,11 @@
                 @Html.EditorFor(model => model.DateReOpened, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DateReOpened, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <!-- Div to contain SMART program data. Shown only if SMART is selected -->
+        <div id="smartdataform" display="none">
+            @Html.Partial("_createSmart", new ASP_Asn_2_n_3.Models.Smart())
         </div>
 
         <div class="form-group">

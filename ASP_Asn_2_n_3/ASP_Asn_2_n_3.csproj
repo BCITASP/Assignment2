@@ -297,6 +297,7 @@
     <Compile Include="Models\ClientsEntity\RiskStatus.cs" />
     <Compile Include="Models\ClientsEntity\Service.cs" />
     <Compile Include="Models\ClientsEntity\VictimOfIncident.cs" />
+    <Compile Include="Models\CreateRecordModel.cs" />
     <Compile Include="Models\SmartEntity\BadDateReport.cs" />
     <Compile Include="Models\SmartEntity\CityOfAssault.cs" />
     <Compile Include="Models\SmartEntity\CityOfResidence.cs" />
@@ -315,6 +316,7 @@
     <Compile Include="Models\SmartEntity\SmartMetaData\BadDateReportMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\CityOfAssaultMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\CityOfResidenceMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\SmartMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\DrugFacilitatedAssaultMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\EvidenceStoredMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\HIVMedsMetaData.cs" />
@@ -594,6 +596,8 @@
     <Content Include="Views\Admin\ManageRoles.cshtml" />
     <Content Include="Views\Admin\AddNewRole.cshtml" />
     <Content Include="Views\Admin\RemoveExistingRole.cshtml" />
+    <Content Include="Views\Client\Manage.cshtml" />
+    <Content Include="Views\Client\_createSmart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Controllers
         private GoodSamaritanContext db = new GoodSamaritanContext();
 
         // GET: Smart
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Index()
         {
             var smarts = db.Smarts.Include(s => s.BadDateReport).Include(s => s.CityOfAssault).Include(s => s.CityOfResidence).Include(s => s.Clients).Include(s => s.DrugFacilitatedAssault).Include(s => s.EvidenceStored).Include(s => s.HIVMeds).Include(s => s.HospitalAttended).Include(s => s.MedicalOnly).Include(s => s.MultiplePerpetrators).Include(s => s.PoliceAttendance).Include(s => s.PoliceReported).Include(s => s.ReferredToCBVS).Include(s => s.ReferringHospital).Include(s => s.SexWorkExploitation).Include(s => s.SocialWorkAttendance).Include(s => s.ThirdPartyReport).Include(s => s.VictimServicesAttendance);
@@ -23,6 +24,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Details/5
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Create
+        [Authorize(Roles = "")]
         public ActionResult Create()
         {
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA");
@@ -66,13 +69,23 @@ namespace ASP_Asn_2_n_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart)
+        [Authorize(Roles = "Administrator,Worker")]
+        public async Task<ActionResult> Create([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart,
+            bool comingFromClient = false)
         {
             if (ModelState.IsValid)
             {
                 db.Smarts.Add(smart);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                if (!comingFromClient)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Clients");
+                }
             }
 
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA", smart.BadDateReportId);
@@ -93,10 +106,12 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.SocialWorkAttendanceId = new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA", smart.SocialWorkAttendanceId);
             ViewBag.ThirdPartyReportId = new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA", smart.ThirdPartyReportId);
             ViewBag.VictimServicesAttendanceId = new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA");
+            
             return View(smart);
         }
 
         // GET: Smart/Edit/5
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -134,13 +149,23 @@ namespace ASP_Asn_2_n_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart)
+        [Authorize(Roles = "Administrator,Worker")]
+        public async Task<ActionResult> Edit([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart,
+            bool comingFromClient = false)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(smart).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                if (!comingFromClient)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Clients");
+                }
             }
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA", smart.BadDateReportId);
             ViewBag.CityOfAssaultId = new SelectList(db.CityOfAssaults, "CityOfAssaultId", "City", smart.CityOfAssaultId);
@@ -164,6 +189,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Delete/5
+        [Authorize(Roles = "Administrator,Worker")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -181,6 +207,7 @@ namespace ASP_Asn_2_n_3.Controllers
         // POST: Smart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Worker")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Smart smart = await db.Smarts.FindAsync(id);
@@ -196,6 +223,32 @@ namespace ASP_Asn_2_n_3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public Dictionary<String,SelectList> GetSelectLists()
+        {
+
+            Dictionary<String,SelectList> selectLists = new Dictionary<String,SelectList>();
+            selectLists.Add("BadDateReportId", new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA") );
+            selectLists.Add("CityOfAssaultId", new SelectList(db.CityOfAssaults, "CityOfAssaultId", "City"));
+            selectLists.Add("CityOfResidenceId", new SelectList(db.CityOfResidences, "CityOfResidenceId", "City"));
+            selectLists.Add("ClientReferenceNumber", new SelectList(db.Clients, "ClientReferenceNumber", "Surname"));
+            selectLists.Add("DrugFacilitatedAssaultId", new SelectList(db.DrugFacilitatedAssaults, "DrugFacilitatedAssaultId", "YesNoNA"));
+            selectLists.Add("EvidenceStoredId", new SelectList(db.EvidenceStoreds, "EvidenceStoredId", "YesNoNA"));
+            selectLists.Add("HIVMedsId", new SelectList(db.HIVMeds, "HIVMedsId", "YesNoNA"));
+            selectLists.Add("HospitalAttendedId", new SelectList(db.HospitalAttendeds, "HospitalAttendedId", "HospitalName"));
+            selectLists.Add("MedicalOnlyId", new SelectList(db.MedicalOnlies, "MedicalOnlyId", "YesNoNA"));
+            selectLists.Add("MultiplePerpetratorsId", new SelectList(db.MultiplePerpetrators, "MultiplePerpetratorsId", "YesNoNA"));
+            selectLists.Add("PoliceAttendanceId", new SelectList(db.PoliceAttendances, "PoliceAttendanceId", "YesNoNA"));
+            selectLists.Add("PoliceReportedId", new SelectList(db.PoliceReporteds, "PoliceReportedId", "YesNoNA"));
+            selectLists.Add("ReferredToCBVSId", new SelectList(db.ReferredToCBVS, "ReferredToCBVSId", "YesNoPVBSOnlyNA"));
+            selectLists.Add("ReferringHospitalId", new SelectList(db.ReferringHospitals, "ReferringHospitalId", "HospitalName"));
+            selectLists.Add("SexWorkExploitationId", new SelectList(db.SexWorkExploitations, "SexWorkExploitationId", "YesNoNA"));
+            selectLists.Add("SocialWorkAttendanceId", new SelectList(db.SocialWorkAttendances, "SocialWorkAttendanceId", "YesNoNA"));
+            selectLists.Add("ThirdPartyReportId", new SelectList(db.ThirdPartyReports, "ThirdPartyReportId", "YesNoNA"));
+            selectLists.Add("VictimServicesAttendanceId", new SelectList(db.VictimServicesAttendances, "VictimServicesAttendanceId", "YesNoNA"));
+        
+            return selectLists;
         }
     }
 }
