@@ -58,6 +58,25 @@
             $http.get(apiURL + "getReport?monthnum=" + monthNum + "&yearid=" + yearID)
                 .success(function (response) {
 
+                    $scope.statusopen = response.statusOpen;
+                    $scope.statusclosed = response.statusClosed;
+                    $scope.statusreopened = response.statusReopened;
+
+                    $scope.programcrisis = response.programCrisis;
+                    $scope.programcourt = response.programCourt;
+                    $scope.programsmart = response.programSMART;
+                    $scope.programdvu = response.programDVU;
+                    $scope.programmcfd = response.programMCFD;
+
+                    $scope.gendermale = response.genderMale;
+                    $scope.genderfemale = response.genderFemale;
+                    $scope.gendertrans = response.genderTrans;
+
+                    $scope.age24_65 = response.age24_65;
+                    $scope.age18_25 = response.age18_25;
+                    $scope.age12_19 = response.age12_19;
+                    $scope.age13 = response.age13;
+                    $scope.age64 = response.age64;
                 });
         }
 
