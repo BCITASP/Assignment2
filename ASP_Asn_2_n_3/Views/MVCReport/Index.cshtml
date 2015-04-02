@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Select Report Period";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    SelectList years = ViewBag.yearsSelect;
+}
+<div class="container">
+    <div class="form-horizontal center-block text-center">
+        <h3>Select month and year</h3>
+        <div>
+@using (Html.BeginForm("Report", "MVCReport", FormMethod.Post))
+{
+    <select id="selectMonth" name="selectMonth" style="width:auto">
+        <option value="" selected="selected">Month</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+    @Html.DropDownList("selectYear", years, "Years")
+    <input type="submit" value="Go" />
+}
+        </div>
+    </div>
+</div>

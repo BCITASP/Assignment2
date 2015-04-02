@@ -217,6 +217,7 @@
     <Compile Include="Controllers\LookupTableControllers\Smart\SocialWorkAttendancesController.cs" />
     <Compile Include="Controllers\LookupTableControllers\Smart\ThirdPartyReportsController.cs" />
     <Compile Include="Controllers\LookupTableControllers\Smart\VictimServicesAttendancesController.cs" />
+    <Compile Include="Controllers\MVCReportController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SmartController.cs" />
     <Compile Include="Global.asax.cs">
@@ -597,6 +598,8 @@
     <Content Include="Views\Admin\RemoveExistingRole.cshtml" />
     <Content Include="Views\Client\Manage.cshtml" />
     <Content Include="Views\Client\_createSmart.cshtml" />
+    <Content Include="Views\MVCReport\Index.cshtml" />
+    <Content Include="Views\MVCReport\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
