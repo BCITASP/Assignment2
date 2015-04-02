@@ -11,13 +11,13 @@ using ASP_Asn_2_n_3.Models;
 
 namespace ASP_Asn_2_n_3.Controllers
 {
-    [Authorize(Roles = "Administrator,Worker")]
     public class ClientController : Controller
     {
         private GoodSamaritanContext db = new GoodSamaritanContext();
         private SmartController sc = new SmartController();
 
         // GET: Client
+        [Authorize(Roles = "Administrator,Worker,Reporter")]
         public async Task<ActionResult> Index()
         //public ActionResult Index()
         {
@@ -27,6 +27,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Client/Details/5
+        [Authorize(Roles = "Administrator,Worker,Reporter")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +39,22 @@ namespace ASP_Asn_2_n_3.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.smartObject = new Smart();
+
+            if (clients.ClientReferenceNumber == 3)
+            {
+                var smartId = (from s in db.Smarts
+                               where s.ClientReferenceNumber == clients.ClientReferenceNumber
+                               select (s.SmartId)).SingleOrDefault();
+
+                Smart smart = await db.Smarts.FindAsync(smartId);
+
+                ViewBag.smartObject = smart;
+            }
+
+            ViewBag.ProgramId = clients.ProgramId;
+
             return View(clients);
         }
 
@@ -65,7 +82,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.VictimOfIncidentId = new SelectList(db.VictimOfIncidents, "VictimOfIncidentId", "PrimaryOrSecondary");
             
             // smart entity select lists
-            Dictionary<String,SelectList> selectLists = sc.GetSelectLists();
+            //Dictionary<String,SelectList> selectLists = sc.GetSelectLists();
 
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA");
             ViewBag.CityOfAssaultId = new SelectList(db.CityOfAssaults, "CityOfAssaultId", "City");
@@ -182,7 +199,7 @@ namespace ASP_Asn_2_n_3.Controllers
             ViewBag.VictimOfIncidentId = new SelectList(db.VictimOfIncidents, "VictimOfIncidentId", "PrimaryOrSecondary", clients.VictimOfIncidentId);
 
             // smart entity select lists
-            Dictionary<String, SelectList> selectLists = sc.GetSelectLists();
+            //Dictionary<String, SelectList> selectLists = sc.GetSelectLists();
 
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA", smart.BadDateReportId);
             ViewBag.CityOfAssaultId = new SelectList(db.CityOfAssaults, "CityOfAssaultId", "City", smart.CityOfAssaultId);
@@ -217,12 +234,11 @@ namespace ASP_Asn_2_n_3.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*
-                var clientQuery = (from s in db.Smarts
-                             where s.ClientReferenceNumber == id
-                             select (s.SmartId)).SingleOrDefault();
-                */
-
+                // get the programid set in the db before this edit
+                var clientsQuery =  (from c in db.Clients
+                                    where c.ClientReferenceNumber == clients.ClientReferenceNumber
+                                    select (c.ProgramId)).SingleOrDefault();
+                
                 db.Entry(clients).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
@@ -230,11 +246,34 @@ namespace ASP_Asn_2_n_3.Controllers
                 // send smart data to the smart controller
                 if (clients.ProgramId == 3)
                 {
-                    await sc.Edit(smart, true);
+                    var smartEntity =   (from s in db.Smarts
+                                        where s.ClientReferenceNumber == clients.ClientReferenceNumber
+                                        select (s.SmartId)).FirstOrDefault();
+
+                    if (smartEntity == 0)
+                    {
+                        smart.ClientReferenceNumber = clients.ClientReferenceNumber;
+                        await sc.Create(smart, true);
+                    }
+                    else
+                    {
+                        await sc.Edit(smart, true);
+                    }
+                }
+                // if it used to be the SMART program but has changed,
+                // delete SMART program data for this client
+                else if(clientsQuery == 3)
+                {
+                    var smartId =   (from s in db.Smarts
+                                    where s.ClientReferenceNumber == clients.ClientReferenceNumber
+                                    select (s.SmartId)).SingleOrDefault();
+
+                    await sc.DeleteConfirmed(smartId);
                 }
 
                 return RedirectToAction("Index");
             }
+
             ViewBag.AbuserRelationshipId = new SelectList(db.AbuserRelationships, "AbuserRelationshipId", "Relationship", clients.AbuserRelationshipId);
             ViewBag.AgeId = new SelectList(db.Ages, "AgeId", "Range", clients.AgeId);
             ViewBag.AssignedWorkerId = new SelectList(db.AssignedWorkers, "AssignedWorkerId", "Name", clients.AssignedWorkerId);
@@ -269,6 +308,23 @@ namespace ASP_Asn_2_n_3.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.smartObject = new Smart();
+
+            if(clients.ClientReferenceNumber == 3)
+            {
+                var smartId = (from s in db.Smarts
+                               where s.ClientReferenceNumber == clients.ClientReferenceNumber
+                               select (s.SmartId)).SingleOrDefault();
+
+                Smart smart = await db.Smarts.FindAsync(smartId);
+
+                ViewBag.smartObject = smart;
+            }
+
+            ViewBag.ProgramId = clients.ProgramId;
+            
+
             return View(clients);
         }
 
@@ -279,7 +335,21 @@ namespace ASP_Asn_2_n_3.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Clients clients = await db.Clients.FindAsync(id);
+            
+            // remove clients and smart entity, if exists
             db.Clients.Remove(clients);
+            
+            if(clients.ProgramId == 3)
+            {
+                var smartId = (from s in db.Smarts
+                               where s.ClientReferenceNumber == clients.ClientReferenceNumber
+                               select (s.SmartId)).SingleOrDefault();
+                
+                Smart smart = await db.Smarts.FindAsync(smartId);
+                db.Smarts.Remove(smart);
+            }
+
+            // save changes
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

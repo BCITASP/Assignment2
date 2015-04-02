@@ -4,6 +4,20 @@
     ViewBag.Title = "Delete";
 }
 
+<script>
+    $(document).ready(function(){
+        $('#smartdataform').hide();
+
+        var programid = @ViewBag.ProgramId;
+
+        if (programid == 3) {
+            $('#smartdataform').show();
+        } else {
+            $('#smartdataform').hide();
+        }
+    });
+</script>
+
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -132,11 +146,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Service.File)
+            @Html.DisplayNameFor(model => model.Service.Type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Service.File)
+            @Html.DisplayFor(model => model.Service.Type)
         </dd>
 
         <dt>
@@ -284,6 +298,12 @@
         </dd>
 
     </dl>
+    
+    <!-- Div to contain SMART program data. Shown only if SMART is selected -->
+    <div id="smartdataform" display="none">
+        <br />
+        @Html.Partial("_deleteSmart", (ASP_Asn_2_n_3.Models.Smart)ViewBag.smartObject)
+    </div>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

@@ -224,7 +224,7 @@ namespace ASP_Asn_2_n_3.Controllers
             }
             base.Dispose(disposing);
         }
-
+        /*
         public Dictionary<String,SelectList> GetSelectLists()
         {
 
@@ -250,5 +250,6 @@ namespace ASP_Asn_2_n_3.Controllers
         
             return selectLists;
         }
+         * */
     }
 }

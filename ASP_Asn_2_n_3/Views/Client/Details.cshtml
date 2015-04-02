@@ -4,6 +4,20 @@
     ViewBag.Title = "Details";
 }
 
+<script>
+    $(document).ready(function(){
+        $('#smartdataform').hide();
+
+        var programid = @ViewBag.ProgramId;
+
+        if (programid == 3) {
+            $('#smartdataform').show();
+        } else {
+            $('#smartdataform').hide();
+        }
+    });
+</script>
+
 <h2>Details</h2>
 
 <div>
@@ -283,6 +297,13 @@
         </dd>
 
     </dl>
+
+    <!-- Div to contain SMART program data. Shown only if SMART is selected -->
+    <div id="smartdataform" display="none">
+        <br />
+        @Html.Partial("_deleteSmart", (ASP_Asn_2_n_3.Models.Smart)ViewBag.smartObject)
+    </div>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientReferenceNumber }) |
