@@ -56,8 +56,12 @@ namespace ASP_Asn_2_n_3.Models
         public virtual int NumberOfChildren7to12 { get; set; }
         public virtual int NumberOfChildren13to18 { get; set; }
         public virtual int StatusOfFileId { get; set; }
+
+        [DataType(DataType.Date)]
         public virtual DateTime DateLastTransferred { get; set; }
+        [DataType(DataType.Date)]
         public virtual DateTime DateClosed { get; set; }
+        [DataType(DataType.Date)]
         public virtual DateTime DateReOpened { get; set; }
 
         public virtual IEnumerable<Smart> Smart { get; set; }
