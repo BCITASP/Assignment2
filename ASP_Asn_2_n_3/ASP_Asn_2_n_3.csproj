@@ -316,6 +316,7 @@
     <Compile Include="Models\SmartEntity\SmartMetaData\BadDateReportMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\CityOfAssaultMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\CityOfResidenceMetaData.cs" />
+    <Compile Include="Models\SmartEntity\SmartMetaData\SmartMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\DrugFacilitatedAssaultMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\EvidenceStoredMetaData.cs" />
     <Compile Include="Models\SmartEntity\SmartMetaData\HIVMedsMetaData.cs" />

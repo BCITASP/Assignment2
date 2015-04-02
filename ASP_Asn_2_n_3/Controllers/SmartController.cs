@@ -16,6 +16,7 @@ namespace ASP_Asn_2_n_3.Controllers
         private GoodSamaritanContext db = new GoodSamaritanContext();
 
         // GET: Smart
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Index()
         {
             var smarts = db.Smarts.Include(s => s.BadDateReport).Include(s => s.CityOfAssault).Include(s => s.CityOfResidence).Include(s => s.Clients).Include(s => s.DrugFacilitatedAssault).Include(s => s.EvidenceStored).Include(s => s.HIVMeds).Include(s => s.HospitalAttended).Include(s => s.MedicalOnly).Include(s => s.MultiplePerpetrators).Include(s => s.PoliceAttendance).Include(s => s.PoliceReported).Include(s => s.ReferredToCBVS).Include(s => s.ReferringHospital).Include(s => s.SexWorkExploitation).Include(s => s.SocialWorkAttendance).Include(s => s.ThirdPartyReport).Include(s => s.VictimServicesAttendance);
@@ -23,6 +24,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Details/5
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Create
+        [Authorize(Roles = "")]
         public ActionResult Create()
         {
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA");
@@ -66,6 +69,7 @@ namespace ASP_Asn_2_n_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Worker")]
         public async Task<ActionResult> Create([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart,
             bool comingFromClient = false)
         {
@@ -107,6 +111,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Edit/5
+        [Authorize(Roles = "")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -144,13 +149,23 @@ namespace ASP_Asn_2_n_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart)
+        [Authorize(Roles = "Administrator,Worker")]
+        public async Task<ActionResult> Edit([Bind(Include = "SmartId,ClientReferenceNumber,SexWorkExploitationId,MultiplePerpetratorsId,DrugFacilitatedAssaultId,CityOfAssaultId,CityOfResidenceId,AccompanimnetMinutes,ReferringHospitalId,HospitalAttendedId,SocialWorkAttendanceId,PoliceAttendanceId,VictimServiceAttendanceId,MedicalOnlyId,EvidenceStoredId,HIVMedsId,ReferredToCBVSId,PoliceReportedId,ThirdPartyReportId,BadDateReportId,ReferredToNursePractitioner")] Smart smart,
+            bool comingFromClient = false)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(smart).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                if (!comingFromClient)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Clients");
+                }
             }
             ViewBag.BadDateReportId = new SelectList(db.BadDateReports, "BadDateReportId", "YesNoNA", smart.BadDateReportId);
             ViewBag.CityOfAssaultId = new SelectList(db.CityOfAssaults, "CityOfAssaultId", "City", smart.CityOfAssaultId);
@@ -174,6 +189,7 @@ namespace ASP_Asn_2_n_3.Controllers
         }
 
         // GET: Smart/Delete/5
+        [Authorize(Roles = "Administrator,Worker")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,6 +207,7 @@ namespace ASP_Asn_2_n_3.Controllers
         // POST: Smart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Worker")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Smart smart = await db.Smarts.FindAsync(id);
