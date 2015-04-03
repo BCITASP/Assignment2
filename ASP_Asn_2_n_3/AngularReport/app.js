@@ -3,8 +3,10 @@
 
     var ReportController = function ($scope, $http) {
 
-        var host = "localhost";
-        var port = "57290";
+        //var host = "localhost";
+        //var port = "57290";
+        var host = "a3.ergostratus.com";
+        var port = "80";
         var baseURL = "http://" + host + ":" + port + "/";
         var loginURL = baseURL + "Token";
         var apiURL = baseURL + "api/Report/";
