@@ -11,6 +11,10 @@
         if (User.IsInRole("Administrator"))
         {
             <p>
+                <a href="Client/" class="btn btn-primary btn-lg">Manage Client Data</a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="MVCReport/" class="btn btn-primary btn-lg">Generate Reports</a>
+                <br/><br/>
                 <a href="Admin/ManageUsers" class="btn btn-primary btn-lg">Manage Users</a>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <a href="Admin/ManageRoles" class="btn btn-primary btn-lg">Manage Roles</a>
@@ -19,15 +23,15 @@
         else if (User.IsInRole("Worker"))
         {
             <p>
-                <a href="" class="btn btn-primary btn-lg">Enter / Update Client Data</a>
+                <a href="Client/" class="btn btn-primary btn-lg">Manage Client Data</a>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="" class="btn btn-primary btn-lg">Generate Report</a>
+                <a href="MVCReport/" class="btn btn-primary btn-lg">Generate Reports</a>
             </p>
         }
         else if (User.IsInRole("Reporter"))
         {
             <p>
-                <a href="" class="btn btn-primary btn-lg">Generate Report</a>
+                <a href="MVCReport/" class="btn btn-primary btn-lg">Generate Reports</a>
             </p>
         }
     }

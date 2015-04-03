@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -26,8 +26,10 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Administrator"))
                     {
-                    <li>@Html.ActionLink("Manage Users", "ManageUsers", "Admin")</li>
-                    <li>@Html.ActionLink("Manage Roles", "ManageRoles", "Admin")</li>
+                    <li>@Html.ActionLink("Client Data", "Index", "Client")</li>
+                    <li>@Html.ActionLink("Reports", "Index", "MVCReport")</li>
+                    <li>@Html.ActionLink("Users", "ManageUsers", "Admin")</li>
+                    <li>@Html.ActionLink("Roles", "ManageRoles", "Admin")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenu1" aria-expanded="false">Lookup Tables<span class="caret"></span></a>
                             <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -71,12 +73,12 @@
                     }
                     else if (User.IsInRole("Worker"))
                     {
-                        <li>@Html.ActionLink("Enter / Update Client Data", "", "")</li>
-                        <li>@Html.ActionLink("Generate Report", "", "")</li>
+                        <li>@Html.ActionLink("Manage Client Data", "Index", "Client")</li>
+                        <li>@Html.ActionLink("Generate Reports", "Index", "MVCReport")</li>
                     }
                     else if (User.IsInRole("Reporter"))
                     {
-                        <li>@Html.ActionLink("Generate Report", "", "")</li>
+                        <li>@Html.ActionLink("Generate Reports", "Index", "MVCReport")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
