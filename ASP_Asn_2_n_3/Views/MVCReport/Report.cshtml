@@ -4,10 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="margin-top:20px;min-width:750px;" ng-show="showreport">
+<div class="container" style="margin-top:20px;min-width:750px;">
+    <div class="text-center">
+        @Html.ActionLink("<< Back", "Index")
+    </div>
     <div class="jumbotron">
         <div><p class="text-center">MONTH END STATISTICS</p></div>
-        <p>Report Date: {{currentdate}}</p>
+        <p>Report Date: @ViewBag.currentdate</p>
         <!--BEGIN REPORT FOR MONTH/YEAR SECTION-->
         <div class="row">
             <div class="col-sm-8">
@@ -20,7 +23,7 @@
                             MONTH
                         </div>
                         <div class="col-sm-6">
-                            {{month}}
+                            @ViewBag.month
                         </div>
                     </div>
                     <div class="row">
@@ -28,7 +31,7 @@
                             YEAR
                         </div>
                         <div class="col-sm-6">
-                            {{year}}
+                            @ViewBag.year
                         </div>
                     </div>
                 </div>
@@ -62,17 +65,17 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{statusopen}}
+                    @ViewBag.statusopen
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{statusclosed}}
+                    @ViewBag.statusclosed
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{statusreopened}}
+                    @ViewBag.statusreopened
                 </div>
             </div>
         </div>
@@ -117,27 +120,27 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{programcrisis}}
+                    @ViewBag.programcrisis
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{programcourt}}
+                    @ViewBag.programcourt
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{programsmart}}
+                    @ViewBag.programsmart
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{programdvu}}
+                    @ViewBag.programdvu
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{programmcfd}}
+                    @ViewBag.programmcfd
                 </div>
             </div>
         </div>
@@ -172,17 +175,16 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{genderfemale}}
+                    @ViewBag.genderfemale
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{gendermale}}
-                </div>
+                    @ViewBag.gendermale                </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{gendertrans}}
+                    @ViewBag.gendertrans
                 </div>
             </div>
         </div>
@@ -227,27 +229,27 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{age24_65}}
+                    @ViewBag.age24_65
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{age18_25}}
+                    @ViewBag.age18_25
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{age12_19}}
+                    @ViewBag.age12_19
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{age13}}
+                    @ViewBag.age13
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text-right">
-                    {{age64}}
+                    @ViewBag.age64
                 </div>
             </div>
         </div>
